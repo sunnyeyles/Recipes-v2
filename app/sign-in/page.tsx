@@ -1,6 +1,10 @@
 import { SignIn } from "@clerk/nextjs";
 
 const SignInPage = () => {
-  return <SignIn afterSignUpUrl="/recipes" redirectUrl="/recipes" />;
+  return (
+    <div className="flex justify-center m-12">
+      <SignIn afterSignUpUrl="/recipes" />
+    </div>
+  );
 };
 export default SignInPage;
