@@ -4,8 +4,6 @@ import { redirect } from "next/navigation";
 import { connectMongo } from "@/api-client/connectMongoDb";
 const runAuthenticate = async () => {
   try {
-    await connectMongo();
-    console.log("Db connected");
     const user = await currentUser();
     console.log("This is the signed in user: ", user);
     const match = await User.findOne({ _id: user?.id });
@@ -23,7 +21,7 @@ const runAuthenticate = async () => {
     console.error("Error in API handler:", error);
     throw new Error();
   }
-  // redirect('/recipes')
+  redirect("/recipes");
 };
 
 const AuthenticateUser = async () => {

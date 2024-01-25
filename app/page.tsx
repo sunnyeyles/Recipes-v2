@@ -2,18 +2,22 @@ import Link from "next/link";
 import { connectMongo } from "@/api-client/connectMongoDb";
 import axios from "axios";
 import { auth } from "@clerk/nextjs";
-// Dummy Data
+import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
-export default function Home() {
-  connectMongo();
+const Home = async () => {
+  await connectMongo();
   const { userId } = auth();
 
   let href = userId ? "/recipes" : "/authenticate-user";
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main>
       <button>
-        <Link href={href}>Home</Link>
+        <Button asChild>
+          <Link href={href}>Login</Link>
+        </Button>
       </button>
     </main>
   );
-}
+};
+export default Home;
