@@ -1,5 +1,4 @@
 import axios from "axios";
-import { UUID, randomUUID } from "crypto";
 const extractRecipeSubstring = (dataString: string) => {
   const startIndex = dataString.indexOf("{");
   const endIndex = dataString.lastIndexOf("}");
@@ -30,10 +29,10 @@ export const fetchGeneratedRecipe = async (keyword: string) => {
 
     const recipeSubstring = extractRecipeSubstring(dataString);
     const recipeObject = parseRecipeObject(recipeSubstring);
-    const recipeObjectWithId = {
+    const completeObject = {
       ...recipeObject,
     };
-    return recipeObjectWithId;
+    return completeObject;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     return null;
