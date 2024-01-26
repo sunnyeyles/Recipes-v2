@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createRecipeAndRetrieve } from "@/api-client/createRecipeAndRetrieve";
 
 const inputSchema = z.object({
   input: z.string().min(2, {

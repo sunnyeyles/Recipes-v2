@@ -3,6 +3,8 @@ import OpenAI from 'openai'
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
+import Recipe from '@/db-models/recipeModel'
+import User from '@/db-models/userModel'
 
 export const POST = async (request: Request, response: Response) => {
   try {
