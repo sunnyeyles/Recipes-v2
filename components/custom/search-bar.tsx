@@ -3,20 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import axios from "axios";
 import { fetchGeneratedRecipe } from "@/api-client/fetchAIGeneratedRecipe";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createRecipeAndRetrieve } from "@/api-client/createRecipeAndRetrieve";
 
 const inputSchema = z.object({
   input: z.string().min(2, {

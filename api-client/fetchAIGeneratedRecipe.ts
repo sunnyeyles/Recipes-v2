@@ -20,19 +20,7 @@ export const fetchGeneratedRecipe = async (keyword: string) => {
       data: keyword,
     });
 
-    const dataString = response?.data?.data?.message?.content;
-
-    if (!dataString) {
-      console.error("Error: No recipe data found in the response");
-      return null;
-    }
-
-    const recipeSubstring = extractRecipeSubstring(dataString);
-    const recipeObject = parseRecipeObject(recipeSubstring);
-    const completeObject = {
-      ...recipeObject,
-    };
-    return completeObject;
+    return response.data.data.message.content;
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     return null;
