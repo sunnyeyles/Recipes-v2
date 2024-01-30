@@ -24,7 +24,6 @@ export const SearchBar = () => {
   const onSubmit = async (data: { input: string }) => {
     try {
       const response = await fetchGeneratedRecipe(data.input);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
