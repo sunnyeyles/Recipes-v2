@@ -5,7 +5,6 @@ export const fetchGeneratedRecipe = async (keyword: string) => {
     const response = await axios.post("/api/generate-ai-recipe", {
       data: keyword,
     });
-
     return response.data.data.message.content;
   } catch (error) {
     console.error("Error fetching or processing data:", error);

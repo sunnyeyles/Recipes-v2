@@ -7,14 +7,18 @@ import { fetchGeneratedRecipe } from "@/api-client/fetchAIGeneratedRecipe";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { RecipeType } from "@/types/mainTypes";
 const inputSchema = z.object({
   input: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
 });
 
-export const SearchBar = () => {
+export const SearchBar = ({
+  onDataReceived,
+}: {
+  onDataReceived: (newRecipes: RecipeType[]) => void;
+}) => {
   const form = useForm<z.infer<typeof inputSchema>>({
     resolver: zodResolver(inputSchema),
     defaultValues: {
@@ -24,6 +28,8 @@ export const SearchBar = () => {
   const onSubmit = async (data: { input: string }) => {
     try {
       const response = await fetchGeneratedRecipe(data.input);
+      onDataReceived(response.data.recipes);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
