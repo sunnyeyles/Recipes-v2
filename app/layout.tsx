@@ -20,14 +20,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true}>
       <ClerkProvider
         appearance={{
-          baseTheme: dark,
-          variables: { colorPrimary: "#24b357" },
+          variables: { colorPrimary: "#ea580b" },
         }}
       >
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
