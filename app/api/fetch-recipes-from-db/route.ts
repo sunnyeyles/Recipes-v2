@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs";
 import User from "@/db-models/userModel";
 import Recipe from "@/db-models/recipeModel";
-export const GET = async (request: Request) => {
+export const GET = async () => {
   try {
     const user = await currentUser();
     const foundUser = await User.findOne({ _id: user?.id });
