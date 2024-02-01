@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
   let keyword, completion, user, foundUser, recipeObject, newRecipe;
 
   try {
-    keyword = await request.json();
+    const keyword = await request.json();
     const randomToken = Math.random().toString(36).substring(7);
     const systemMessage = `
       Give me a recipe from the keyword "${keyword.data}". Respond with an object containing the following structure(json):

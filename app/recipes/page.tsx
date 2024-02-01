@@ -5,6 +5,9 @@ import { RecipeCard } from "@/components/custom/recipe-card";
 import { Nav } from "../../components/custom/nav";
 import { SearchBar } from "@/components/custom/search-bar";
 import { fetchAllRecipesInDB } from "@/api-client/fetchAllRecipesInDB";
+import { deleteRecipe } from "@/api-client/deleteRecipe";
+import { Types } from "mongoose";
+import mongoose from "mongoose";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const fetchRecipes = async () => {
@@ -21,6 +24,12 @@ const Recipes = () => {
   useEffect(() => {
     fetchRecipes();
   }, [recipes]);
+
+  // delete recipe
+  const handleDelete = (key: string) => {
+    deleteRecipe(key);
+    console.log("deleted");
+  };
 
   return (
     <div>
@@ -40,6 +49,7 @@ const Recipes = () => {
                 ingredients={recipe.ingredients}
                 method={recipe.method}
                 key={String(recipe._id)}
+                deleteRecipe={() => handleDelete(String(recipe._id))}
               />
             ))
         ) : (

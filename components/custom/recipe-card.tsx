@@ -8,14 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipContent,
@@ -25,7 +18,13 @@ import {
 
 import { MouseEventHandler } from "react";
 
-export const RecipeCard = ({ ingredients, method, recipeName }: RecipeType) => {
+export const RecipeCard = ({
+  ingredients,
+  method,
+  recipeName,
+  likeRecipe,
+  deleteRecipe,
+}: RecipeType) => {
   return (
     <Card className="flex flex-col gap-6 m-20 shadow-lg p-4 min-w-80 relative">
       <h2 className="text-lg">{recipeName}</h2>
@@ -57,7 +56,9 @@ export const RecipeCard = ({ ingredients, method, recipeName }: RecipeType) => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost">like</Button>
+              <Button variant="ghost" onClick={likeRecipe}>
+                like
+              </Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Add to liked Recipes</p>
@@ -67,7 +68,9 @@ export const RecipeCard = ({ ingredients, method, recipeName }: RecipeType) => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost">delete</Button>
+              <Button variant="ghost" onClick={deleteRecipe}>
+                delete
+              </Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Delete Item</p>
