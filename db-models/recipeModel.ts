@@ -7,6 +7,7 @@ const recipeSchema = new Schema<RecipeType>({
   recipeName: { type: String, required: true },
   ingredients: { type: [String], required: true },
   method: { type: [String], required: true },
+  liked: { type: Boolean, required: true },
 });
 
 const Recipe =

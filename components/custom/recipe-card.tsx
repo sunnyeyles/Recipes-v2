@@ -16,8 +16,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { MouseEventHandler } from "react";
-
 export const RecipeCard = ({
   ingredients,
   method,
@@ -25,8 +23,20 @@ export const RecipeCard = ({
   likeRecipe,
   deleteRecipe,
 }: RecipeType) => {
+  const [completedIngredients, setCompletedIngredients] = useState<boolean[]>(
+    []
+  );
+
+  const handleIngredientClick = (index: number): void => {
+    setCompletedIngredients((prevCompleted) => {
+      const newCompleted: boolean[] = [...prevCompleted];
+      newCompleted[index] = !newCompleted[index];
+      return newCompleted;
+    });
+  };
+
   return (
-    <Card className="flex flex-col gap-6 m-20 shadow-lg p-4 min-w-80 relative">
+    <Card className="group flex flex-col gap-6 m-20 shadow-lg p-4 min-w-80 relative odd:bg-slate-50 even:bg-slate-100">
       <h2 className="text-lg">{recipeName}</h2>
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
@@ -35,7 +45,17 @@ export const RecipeCard = ({
             <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
               {ingredients && Array.isArray(ingredients)
                 ? ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
+                    <li
+                      onDoubleClick={() => handleIngredientClick(index)}
+                      className={`cursor-pointer ${
+                        completedIngredients[index]
+                          ? "line-through text-gray-900"
+                          : ""
+                      }`}
+                      key={index}
+                    >
+                      {ingredient}
+                    </li>
                   ))
                 : null}
             </ul>
