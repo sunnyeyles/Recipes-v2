@@ -6,8 +6,8 @@ import { Nav } from "../../components/custom/nav";
 import { SearchBar } from "@/components/custom/search-bar";
 import { fetchAllRecipesInDB } from "@/api-client/fetchAllRecipesInDB";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
-import { Types } from "mongoose";
-import mongoose from "mongoose";
+import { likeRecipe } from "@/api-client/likeRecipe";
+
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const fetchRecipes = async () => {
@@ -30,6 +30,10 @@ const Recipes = () => {
     deleteRecipe(key);
     console.log("deleted");
   };
+  const handleLike = (key: string) => {
+    likeRecipe(key);
+    console.log("liked");
+  };
 
   return (
     <div>
@@ -38,23 +42,20 @@ const Recipes = () => {
       </Nav>
       <div className="m-12">
         <h1>The users recipes</h1>
-        {recipes && recipes.length > 0 ? (
-          recipes
-            .slice()
-            .reverse()
-            .map((recipe) => (
-              <RecipeCard
-                {...recipe}
-                recipeName={recipe.recipeName}
-                ingredients={recipe.ingredients}
-                method={recipe.method}
-                key={String(recipe._id)}
-                deleteRecipe={() => handleDelete(String(recipe._id))}
-              />
-            ))
-        ) : (
-          <p>Loading</p>
-        )}
+        {recipes
+          .slice()
+          .reverse()
+          .map((recipe) => (
+            <RecipeCard
+              {...recipe}
+              recipeName={recipe.recipeName}
+              ingredients={recipe.ingredients}
+              method={recipe.method}
+              key={String(recipe._id)}
+              deleteRecipe={() => handleDelete(String(recipe._id))}
+              likeRecipe={() => handleLike(String(recipe._id))}
+            />
+          ))}
       </div>
     </div>
   );

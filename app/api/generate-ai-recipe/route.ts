@@ -76,6 +76,7 @@ export const POST = async (request: Request) => {
       recipeName: recipeObject.recipeName,
       ingredients: recipeObject.ingredients,
       method: recipeObject.method,
+      liked: false,
     });
 
     await Recipe.create(newRecipe);
