@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { RecipeType } from "@/types/mainTypes";
 import { RecipeCard } from "@/components/custom/recipe-card";
 import { Nav } from "../../components/custom/nav";
-import { SearchBar } from "@/components/custom/search-bar";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
 import { fetchLikedRecipesInDB } from "@/api-client/fetchLikedRecipes";
@@ -37,9 +36,7 @@ const Recipes = () => {
 
   return (
     <div>
-      <Nav>
-        <SearchBar onDataReceived={fetchRecipes} />
-      </Nav>
+      <Nav />
       <div className="m-12">
         {recipes.length ? (
           recipes

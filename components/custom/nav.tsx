@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import donut from "../../donut-svgrepo-com.svg";
 import crab from "../../crab-svgrepo-com.svg";
-import { Button } from "../ui/button";
 type NavProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 export const Nav = ({ children }: NavProps) => {
   return (
@@ -18,13 +17,19 @@ export const Nav = ({ children }: NavProps) => {
           className="w-12 hover:animate-bounce"
         />
         <Link href="recipes">
-          <li className="hover:underline hover:cursor-pointer">my recipes</li>
+          <li className="hover:underline hover:cursor-pointer">
+            Search Recipes
+          </li>
         </Link>
         <Link href="liked-recipes">
-          <li className="hover:underline hover:cursor-pointer">liked</li>
+          <li className="hover:underline hover:cursor-pointer">
+            Liked Recipes
+          </li>
         </Link>
-        <li className="hover:underline hover:cursor-pointer">explore</li>
-        <li className="hover:underline hover:cursor-pointer">about</li>
+        <li className="hover:underline hover:cursor-pointer">Explore</li>
+        <Link href="about">
+          <li className="hover:underline hover:cursor-pointer">About</li>
+        </Link>
       </ul>
       {children}
       <UserButton />
