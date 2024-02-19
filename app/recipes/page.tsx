@@ -7,9 +7,11 @@ import { SearchBar } from "@/components/custom/search-bar";
 import { fetchAllRecipesInDB } from "@/api-client/fetchAllRecipesInDB";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
-
+import { RiLayoutGridLine } from "react-icons/ri";
+import { RiLayoutRowLine } from "react-icons/ri";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
+  const [layout, setLayout] = useState<boolean>(false);
   const fetchRecipes = async () => {
     try {
       const response = await fetchAllRecipesInDB();
@@ -24,14 +26,11 @@ const Recipes = () => {
     fetchRecipes();
   }, [recipes]);
 
-  // delete recipe
   const handleDelete = (key: string) => {
     deleteRecipe(key);
-    console.log("deleted");
   };
   const handleLike = (key: string) => {
     likeRecipe(key);
-    console.log("liked");
   };
 
   return (
@@ -39,7 +38,10 @@ const Recipes = () => {
       <Nav>
         <SearchBar onDataReceived={fetchRecipes} />
       </Nav>
-      <div className="">
+      <div className={`${layout ? "" : "flex"} flex-wrap justify-center`}>
+        <button onClick={() => (layout ? setLayout(false) : setLayout(true))}>
+          {layout ? <RiLayoutGridLine /> : <RiLayoutRowLine />}
+        </button>
         {recipes
           .slice()
           .reverse()

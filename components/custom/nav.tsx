@@ -4,13 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import donut from "../../donut-svgrepo-com.svg";
 import crab from "../../crab-svgrepo-com.svg";
+import { RiLayoutGridLine } from "react-icons/ri";
+import { RiLayoutRowLine } from "react-icons/ri";
 type NavProps = {
   children?: ReactNode;
 };
 export const Nav = ({ children }: NavProps) => {
   return (
     <nav className="flex gap-12 items-end flex-wrap justify-between p-6 shadow-xl w-full">
-      <ul className="flex gap-12 items-end">
+      <ul className="flex gap-12 items-end text-lg text-gray-600">
         <Image
           src={crab}
           alt="donut logo"
