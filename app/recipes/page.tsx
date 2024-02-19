@@ -13,7 +13,6 @@ const Recipes = () => {
   const fetchRecipes = async () => {
     try {
       const response = await fetchAllRecipesInDB();
-
       if (response && response.data && response.data.recipes) {
         setRecipes(response.data.recipes);
       }
@@ -40,8 +39,7 @@ const Recipes = () => {
       <Nav>
         <SearchBar onDataReceived={fetchRecipes} />
       </Nav>
-      <div className="m-12">
-        <h1>The users recipes</h1>
+      <div className="">
         {recipes
           .slice()
           .reverse()

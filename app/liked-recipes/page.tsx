@@ -9,6 +9,7 @@ import { fetchLikedRecipesInDB } from "@/api-client/fetchLikedRecipes";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const fetchRecipes = async () => {
     try {
       const response = await fetchLikedRecipesInDB();
@@ -18,6 +19,8 @@ const Recipes = () => {
       }
     } catch (error) {
       console.error("Error fetching recipes:", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -37,8 +40,14 @@ const Recipes = () => {
   return (
     <div>
       <Nav />
-      <div className="m-12">
-        {recipes.length ? (
+      <div className="m-12 flex">
+        {!recipes.length && !isLoading ? (
+          <div>
+            <p className="mt-4 text-lg text-gray-600 text-center">
+              Looks like you don't have any liked recipes
+            </p>
+          </div>
+        ) : (
           recipes
             .slice()
             .reverse()
@@ -53,8 +62,6 @@ const Recipes = () => {
                 likeRecipe={() => handleLike(String(recipe._id))}
               />
             ))
-        ) : (
-          <div>Looks like you don't have any liked recipes</div>
         )}
       </div>
     </div>
