@@ -9,13 +9,14 @@ type NavProps = {
 };
 export const Nav = ({ children }: NavProps) => {
   return (
-    <nav className="flex gap-12 items-end flex-wrap justify-between p-6 shadow-xl">
-      <ul className="flex flex-wrap gap-12 items-end">
+    <nav className="flex gap-12 items-end flex-wrap justify-between p-6 shadow-xl w-full">
+      <ul className="flex gap-12 items-end">
         <Image
           src={crab}
           alt="donut logo"
           className="w-12 hover:animate-bounce"
         />
+
         <Link href="recipes">
           <li className="hover:underline hover:cursor-pointer">
             Search Recipes
