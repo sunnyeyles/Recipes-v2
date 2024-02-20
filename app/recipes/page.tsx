@@ -9,6 +9,7 @@ import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
 import { RiLayoutGridLine } from "react-icons/ri";
 import { RiLayoutRowLine } from "react-icons/ri";
+import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [layout, setLayout] = useState<boolean>(false);
@@ -35,27 +36,27 @@ const Recipes = () => {
 
   return (
     <div>
-      <Nav>
-        <SearchBar onDataReceived={fetchRecipes} />
-      </Nav>
-      <div className={`${layout ? "" : "flex"} flex-wrap justify-center`}>
-        <button onClick={() => (layout ? setLayout(false) : setLayout(true))}>
-          {layout ? <RiLayoutGridLine /> : <RiLayoutRowLine />}
-        </button>
-        {recipes
-          .slice()
-          .reverse()
-          .map((recipe) => (
-            <RecipeCard
-              {...recipe}
-              recipeName={recipe.recipeName}
-              ingredients={recipe.ingredients}
-              method={recipe.method}
-              key={String(recipe._id)}
-              deleteRecipe={() => handleDelete(String(recipe._id))}
-              likeRecipe={() => handleLike(String(recipe._id))}
-            />
-          ))}
+      <NavBarWrapper />
+      <div>
+        <div className="flex justify-center my-16">
+          <SearchBar onDataReceived={fetchRecipes} />
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {recipes
+            .slice()
+            .reverse()
+            .map((recipe) => (
+              <RecipeCard
+                {...recipe}
+                recipeName={recipe.recipeName}
+                ingredients={recipe.ingredients}
+                method={recipe.method}
+                key={String(recipe._id)}
+                deleteRecipe={() => handleDelete(String(recipe._id))}
+                likeRecipe={() => handleLike(String(recipe._id))}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

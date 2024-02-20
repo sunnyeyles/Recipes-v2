@@ -6,7 +6,7 @@ import { Nav } from "../../components/custom/nav";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
 import { fetchLikedRecipesInDB } from "@/api-client/fetchLikedRecipes";
-
+import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -39,8 +39,8 @@ const Recipes = () => {
 
   return (
     <div>
-      <Nav />
-      <div className="m-12 flex">
+      <NavBarWrapper />
+      <div className="m-12 flex-wrap flex justify-center">
         {!recipes.length && !isLoading ? (
           <div>
             <p className="mt-4 text-lg text-gray-600 text-center">
