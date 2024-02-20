@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import { RecipeType } from "@/types/mainTypes";
 import { RecipeCard } from "@/components/custom/recipe-card";
-import { Nav } from "../../components/custom/nav";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
 import { fetchLikedRecipesInDB } from "@/api-client/fetchLikedRecipes";
 import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
+
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
+
   const fetchRecipes = async () => {
     try {
       const response = await fetchLikedRecipesInDB();
@@ -23,15 +24,16 @@ const Recipes = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchRecipes();
   }, []);
 
-  // delete recipe
   const handleDelete = (key: string) => {
     deleteRecipe(key);
     console.log("deleted");
   };
+
   const handleLike = (key: string) => {
     likeRecipe(key);
     console.log("liked");
@@ -44,7 +46,7 @@ const Recipes = () => {
         {!recipes.length && !isLoading ? (
           <div>
             <p className="mt-4 text-lg text-gray-600 text-center">
-              Looks like you don't have any liked recipes
+              Looks like you don&apos;t have any liked recipes
             </p>
           </div>
         ) : (
@@ -67,4 +69,5 @@ const Recipes = () => {
     </div>
   );
 };
+
 export default Recipes;
