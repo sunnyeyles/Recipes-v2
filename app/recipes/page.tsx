@@ -2,17 +2,14 @@
 import { useEffect, useState } from "react";
 import { RecipeType } from "@/types/mainTypes";
 import { RecipeCard } from "@/components/custom/recipe-card";
-import { Nav } from "../../components/custom/nav";
 import { SearchBar } from "@/components/custom/search-bar";
 import { fetchAllRecipesInDB } from "@/api-client/fetchAllRecipesInDB";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
-import { RiLayoutGridLine } from "react-icons/ri";
-import { RiLayoutRowLine } from "react-icons/ri";
+
 import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
-  const [layout, setLayout] = useState<boolean>(false);
   const fetchRecipes = async () => {
     try {
       const response = await fetchAllRecipesInDB();
