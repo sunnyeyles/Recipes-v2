@@ -14,7 +14,6 @@ const Recipes = () => {
   const fetchRecipes = async () => {
     try {
       const response = await fetchLikedRecipesInDB();
-
       if (response) {
         setRecipes(response);
       }
@@ -27,16 +26,14 @@ const Recipes = () => {
 
   useEffect(() => {
     fetchRecipes();
-  }, []);
+  }, [recipes]);
 
   const handleDelete = (key: string) => {
     deleteRecipe(key);
-    console.log("deleted");
   };
 
   const handleLike = (key: string) => {
     likeRecipe(key);
-    console.log("liked");
   };
 
   return (

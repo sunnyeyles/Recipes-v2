@@ -32,7 +32,7 @@ export const NavDropDown = ({ children }: NavProps) => {
                 <ListItem href="/liked-recipes" title="Liked Recipes">
                   View your liked recipes
                 </ListItem>
-                <ListItem href="/docs/primitives/typography" title="About">
+                <ListItem href="/about" title="About">
                   All about the project
                 </ListItem>
               </ul>
