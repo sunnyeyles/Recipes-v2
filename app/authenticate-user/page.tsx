@@ -2,10 +2,9 @@ import { currentUser } from "@clerk/nextjs";
 import User from "@/db-models/userModel";
 import { redirect } from "next/navigation";
 const runAuthenticate = async () => {
+  const user = await currentUser();
+  const match = await User.findOne({ _id: user?.id });
   try {
-    const user = await currentUser();
-    const match = await User.findOne({ _id: user?.id });
-
     if (!match) {
       const newUser = {
         _id: user?.id,
