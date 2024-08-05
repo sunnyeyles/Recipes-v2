@@ -1,17 +1,18 @@
-import Link from "next/link";
-import { connectMongo } from "@/helpers/connectMongoDb";
-import axios from "axios";
+import Link from 'next/link'
+import { connectMongo } from '@/helpers/connectMongoDb'
+import axios from 'axios'
 // import { auth } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
-import background from "../pattern-3289978_1920.png";
-import Image from "next/image";
+import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import background from '../pattern-3289978_1920.png'
+import Image from 'next/image'
+import { Welcome } from '@/components/custom/welcome'
 const Home = async () => {
-  await connectMongo();
+  await connectMongo()
   // const { userId } = auth();
 
   // let href = userId ? "/recipes" : "/authenticate-user";
-  let href = "/authenticate-user";
+  let href = '/authenticate-user'
   return (
     <main>
       <Image
@@ -26,6 +27,6 @@ const Home = async () => {
         </Button>
       </div>
     </main>
-  );
-};
-export default Home;
+  )
+}
+export default Home

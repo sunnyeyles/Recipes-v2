@@ -10,6 +10,7 @@ type ClerkUser = {
 }
 const AuthenticateUser = async () => {
   const user = (await currentUser()) as ClerkUser
+  console.log(user)
   if (!user) {
     return (
       <div>
@@ -17,7 +18,9 @@ const AuthenticateUser = async () => {
       </div>
     )
   }
-  createNewUser()
+  setTimeout(async () => {
+    await createNewUser(), 2000
+  })
 
   return <Welcome name={user?.firstName || 'Guest'} />
 }
