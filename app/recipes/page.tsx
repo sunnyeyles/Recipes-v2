@@ -6,7 +6,6 @@ import { SearchBar } from "@/components/custom/search-bar";
 import { fetchAllRecipesInDB } from "@/api-client/fetchAllRecipesInDB";
 import { deleteRecipe } from "@/api-client/deleteRecipe";
 import { likeRecipe } from "@/api-client/likeRecipe";
-
 import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([]);

@@ -1,7 +1,6 @@
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import User from "@/db-models/userModel";
-import { redirect } from "next/navigation";
-const runAuthenticate = async () => {
+export const createNewUser = async () => {
   const user = await currentUser();
   const match = await User.findOne({ _id: user?.id });
   try {
@@ -13,15 +12,7 @@ const runAuthenticate = async () => {
       await User.create(newUser);
     }
   } catch (error) {
-    console.error("Error in API handler:", error);
+    console.error("something went wrong:", error);
     throw new Error();
   }
-  redirect("/recipes");
 };
-
-const AuthenticateUser = async () => {
-  await runAuthenticate();
-  return <div>Loading</div>;
-};
-
-export default AuthenticateUser;

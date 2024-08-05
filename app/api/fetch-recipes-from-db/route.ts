@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import User from "@/db-models/userModel";
 import Recipe from "@/db-models/recipeModel";
 export const GET = async () => {

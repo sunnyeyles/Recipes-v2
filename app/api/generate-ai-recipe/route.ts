@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { currentUser } from "@clerk/nextjs";
 import { Types } from "mongoose";
+import { currentUser } from "@clerk/nextjs/server";
 import { RecipeType, UserType } from "@/types/mainTypes";
 import OpenAI from "openai";
 import mongoose from "mongoose";
