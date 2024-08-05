@@ -21,6 +21,7 @@ jobs:
         run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
           echo "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}" >> .env
           echo "CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }}" >> .env
+          echo "MONGODB_URI=${{ secrets.MONGODB_URI}}" >> .env
 
       - name: Install dependencies and run lint and build
         run: |
