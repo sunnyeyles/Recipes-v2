@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { RecipeType } from '@/types/mainTypes'
-import { Types } from 'mongoose'
 
 export const likeRecipe = async (_id: string) => {
   try {
