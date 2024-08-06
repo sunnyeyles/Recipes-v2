@@ -16,7 +16,7 @@ const Recipes = () => {
         setRecipes(response.data.recipes)
       }
     } catch (error) {
-      console.error('Error fetching recipes:', error)
+      console.error('error fetching recipes:', error)
     }
   }
   useEffect(() => {
