@@ -1,40 +1,40 @@
-"use client";
-import { useEffect, useState } from "react";
-import { RecipeType } from "@/types/mainTypes";
-import { RecipeCard } from "@/components/custom/recipe-card";
-import { deleteRecipe } from "@/api-client/deleteRecipe";
-import { likeRecipe } from "@/api-client/likeRecipe";
-import { fetchLikedRecipesInDB } from "@/api-client/fetchLikedRecipes";
-import { NavBarWrapper } from "@/components/custom/nav-bar-wrapper";
+'use client'
+import { useEffect, useState } from 'react'
+import { RecipeType } from '@/types/mainTypes'
+import { RecipeCard } from '@/components/custom/recipe-card'
+import { deleteRecipe } from '@/api-client/deleteRecipe'
+import { likeRecipe } from '@/api-client/likeRecipe'
+import { fetchLikedRecipesInDB } from '@/api-client/fetchLikedRecipes'
+import { NavBarWrapper } from '@/components/custom/nav-bar-wrapper'
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState<RecipeType[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
+  const [recipes, setRecipes] = useState<RecipeType[]>([])
+  const [isLoading, setLoading] = useState<boolean>(true)
 
   const fetchRecipes = async () => {
     try {
-      const response = await fetchLikedRecipesInDB();
+      const response = await fetchLikedRecipesInDB()
       if (response) {
-        setRecipes(response);
+        setRecipes(response)
       }
     } catch (error) {
-      console.error("Error fetching recipes:", error);
+      console.error('Error fetching recipes:', error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchRecipes();
-  }, [recipes]);
+    fetchRecipes()
+  }, [recipes])
 
   const handleDelete = (key: string) => {
-    deleteRecipe(key);
-  };
+    deleteRecipe(key)
+  }
 
   const handleLike = (key: string) => {
-    likeRecipe(key);
-  };
+    likeRecipe(key)
+  }
 
   return (
     <div>
@@ -64,7 +64,7 @@ const Recipes = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Recipes;
+export default Recipes
