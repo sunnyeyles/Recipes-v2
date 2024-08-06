@@ -6,6 +6,7 @@ import { RecipeType } from '@/types/mainTypes'
 
 export const GET = async () => {
   const user = await currentUser()
+  console.log(user)
   const foundUser = await User.findOne({ _id: user?.id })
 
   if (!foundUser) {
