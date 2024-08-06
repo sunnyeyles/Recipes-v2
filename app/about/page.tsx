@@ -1,4 +1,5 @@
 import { NavBarWrapper } from '@/components/custom/nav-bar-wrapper'
+
 const About = () => {
   return (
     <div>
@@ -10,8 +11,8 @@ const About = () => {
           </h1>
           <p className="text-gray-600">
             Welcome to my Recipe Generator App! This web application uses the
-            power of OpenAI's API to create delicious and unique recipes based
-            on your preferences and ingredients.
+            power of OpenAI&apos;s API to create delicious and unique recipes
+            based on your preferences and ingredients.
           </p>
           <p className="text-gray-600">
             The system analyses your input and generates recipes using advanced
@@ -26,7 +27,7 @@ const About = () => {
             everyone.
           </p>
           <p className="text-gray-600">
-            Thank's for checking it out, happy cooking!
+            Thank&apos;s for checking it out, happy cooking!
           </p>
           <h2 className="text-2xl font-bold text-gray-900">
             Technologies Used
