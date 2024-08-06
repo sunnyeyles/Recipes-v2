@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import { Types } from 'mongoose'
 import { currentUser } from '@clerk/nextjs/server'
-import { RecipeType, UserType } from '@/types/mainTypes'
 import OpenAI from 'openai'
 import mongoose from 'mongoose'
 
@@ -10,10 +8,9 @@ const openai = new OpenAI({
 })
 import Recipe from '@/db-models/recipeModel'
 import User from '@/db-models/userModel'
-import Recipes from '@/app/recipes/page'
 
 export const POST = async (request: Request) => {
-  let keyword, completion, user, foundUser, recipeObject, newRecipe
+  let keyword, completion, recipeObject, newRecipe
 
   try {
     const keyword = await request.json()

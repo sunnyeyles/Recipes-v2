@@ -1,4 +1,3 @@
-import { Nav } from '../../components/custom/nav'
 import { NavBarWrapper } from '@/components/custom/nav-bar-wrapper'
 const About = async () => {
   return (
