@@ -1,5 +1,5 @@
 import { currentUser } from '@clerk/nextjs/server'
-import { SignUp, SignIn } from '@clerk/nextjs'
+import { SignUp } from '@clerk/nextjs'
 import type { EmailAddress } from '@clerk/nextjs/server'
 import { createNewUser } from '@/helpers/createNewUser'
 import { Welcome } from '@/components/custom/welcome'
