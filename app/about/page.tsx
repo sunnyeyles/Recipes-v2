@@ -1,4 +1,5 @@
 import { NavBarWrapper } from '@/components/custom/nav-bar-wrapper'
+console.log('Testing is important')
 const About = () => {
   return (
     <div>
