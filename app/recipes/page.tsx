@@ -7,6 +7,7 @@ import { fetchAllRecipesInDB } from '@/api-client/fetchAllRecipesInDB'
 import { deleteRecipe } from '@/api-client/deleteRecipe'
 import { likeRecipe } from '@/api-client/likeRecipe'
 import { NavBarWrapper } from '@/components/custom/nav-bar-wrapper'
+console.log('testing testing testing')
 const Recipes = () => {
   const [recipes, setRecipes] = useState<RecipeType[]>([])
   const fetchRecipes = async () => {
@@ -16,7 +17,7 @@ const Recipes = () => {
         setRecipes(response.data.recipes)
       }
     } catch (error) {
-      console.error('Error fetching recipes:', error)
+      console.error('error fetching recipes:', error)
     }
   }
   useEffect(() => {

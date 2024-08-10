@@ -1,15 +1,14 @@
-"use client";
-import { ReactNode } from "react";
+'use client'
+import { ReactNode } from 'react'
 
-import { useIsLargeScreen } from "@/helpers/useMediaQuery";
-import { Nav } from "./nav";
-import { NavDropDown } from "./nav-dropdown";
-import { SearchBar } from "./search-bar";
+import { useIsLargeScreen } from '@/helpers/useMediaQuery'
+import { Nav } from './nav'
+import { NavDropDown } from './nav-dropdown'
 type NavProps = {
-  children?: ReactNode;
-};
+  children?: ReactNode
+}
 export const NavBarWrapper = ({ children }: NavProps) => {
-  const { isLargeScreen } = useIsLargeScreen();
+  const { isLargeScreen } = useIsLargeScreen()
 
-  return <div>{!isLargeScreen ? <NavDropDown /> : <Nav />}</div>;
-};
+  return <div>{!isLargeScreen ? <NavDropDown /> : <Nav />}</div>
+}

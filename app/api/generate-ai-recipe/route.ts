@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { currentUser } from '@clerk/nextjs/server'
 import OpenAI from 'openai'
 import mongoose from 'mongoose'
+import { currentUser } from '@clerk/nextjs/server'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -14,6 +14,8 @@ export const POST = async (request: Request) => {
 
   try {
     const keyword = await request.json()
+
+    // adds some randomness to make sure duplicate recipes are not returned
     const randomToken = Math.random().toString(36).substring(7)
     const systemMessage = `
       Give me a recipe from the keyword "${keyword.data}". Respond with an object containing the following structure(json):
@@ -37,21 +39,21 @@ export const POST = async (request: Request) => {
       model: 'gpt-3.5-turbo',
     })
   } catch (error) {
-    console.error('Error requesting recipe from OpenAI:', error)
+    console.error('error requesting recipe from OpenAI:', error)
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'internal server error' },
       { status: 500 }
     )
   }
 
   try {
-    // Get the current user
+    // get the current user from the db
     const user = await currentUser()
     const foundUser = await User.findOne({ _id: user?.id })
 
     if (!foundUser) {
       console.error('User not found')
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+      return NextResponse.json({ error: 'user not found' }, { status: 404 })
     }
 
     const recipeReturned = completion.choices[0].message.content
@@ -60,14 +62,14 @@ export const POST = async (request: Request) => {
       try {
         recipeObject = JSON.parse(recipeReturned)
       } catch (error) {
-        console.error('Error parsing JSON:', error)
+        console.error('error parsing JSON:', error)
         return NextResponse.json(
-          { error: 'Error parsing JSON' },
+          { error: 'error parsing JSON' },
           { status: 500 }
         )
       }
     }
-
+    // create new recipe recipe object to put in the db
     newRecipe = new Recipe({
       _id: new mongoose.Types.ObjectId(),
       recipeName: recipeObject.recipeName,
@@ -75,11 +77,10 @@ export const POST = async (request: Request) => {
       method: recipeObject.method,
       liked: false,
     })
-
     await Recipe.create(newRecipe)
-    foundUser.recipes.push(newRecipe)
 
-    // Save the updated user with the new recipe
+    // update the user entry with the newly generated recipe
+    foundUser.recipes.push(newRecipe)
     await foundUser.save()
 
     return NextResponse.json({
@@ -87,9 +88,9 @@ export const POST = async (request: Request) => {
       request: keyword,
     })
   } catch (error) {
-    console.error('Error adding recipe to user:', error)
+    console.error('error adding recipe to user:', error)
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'internal server error' },
       { status: 500 }
     )
   }

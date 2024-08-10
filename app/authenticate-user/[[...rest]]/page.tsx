@@ -1,5 +1,5 @@
 import { currentUser } from '@clerk/nextjs/server'
-import { SignUp } from '@clerk/nextjs'
+import { SignIn } from '@clerk/nextjs'
 import type { EmailAddress } from '@clerk/nextjs/server'
 import { createNewUser } from '@/helpers/createNewUser'
 import { Welcome } from '@/components/custom/welcome'
@@ -8,19 +8,17 @@ type ClerkUser = {
   firstName?: string
   emailAddresses?: EmailAddress[]
 }
+// create the user as soon as they log in so they can already start using the app
 const AuthenticateUser = async () => {
   const user = (await currentUser()) as ClerkUser
-  console.log(user)
   if (!user) {
     return (
-      <div>
-        <SignUp />
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <SignIn />
       </div>
     )
   }
-  setTimeout(async () => {
-    await createNewUser(), 2000
-  })
+  await createNewUser(), 2000
 
   return <Welcome name={user?.firstName || 'Guest'} />
 }
