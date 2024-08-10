@@ -1,3 +1,12 @@
 # Recipes
 
-The second version of a recipe generator app using the openAI API built with NextJS
+Welcome to my Recipe Generator App! This web application uses the
+power of OpenAI's API to create delicious and unique recipes based
+on your preferences and ingredients.
+
+## Technologies
+
+- Next.js
+- Tailwind
+- Openai API
+- Clerk
