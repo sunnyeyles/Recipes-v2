@@ -2,6 +2,14 @@
 
 import { Button } from '@/components/ui/button'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { Input } from '@/components/ui/input'
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+} from '@/components/ui/form'
 
 type TFormType = {
   recipeName: string
@@ -20,7 +28,7 @@ export const RecipeStepsForm = () => {
     },
   })
 
-  const { register, control, handleSubmit } = form
+  const { control, handleSubmit } = form
 
   // ingredients
   const {
@@ -47,89 +55,100 @@ export const RecipeStepsForm = () => {
   }
 
   return (
-    <div className="m-20">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        {/* recipe name */}
-        <div className="m-6">
-          <label htmlFor="recipeName" className="border-b-2 block">
-            Recipe Name
-          </label>
-          <input
-            className="border-2 w-full"
-            type="text"
-            id="recipeName"
-            {...register('recipeName')}
+    <div className="p-8">
+      <Form {...form}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={control}
+            name="recipeName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Recipe Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter recipe name" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
           />
-        </div>
 
-        {/* ingredients */}
-        <div>
-          <label className="border-b-2 block">Ingredients</label>
-          {ingredientFields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2">
-              <input
-                className="border-2 flex-1"
-                type="text"
-                {...register(`ingredients.${index}.ingredient` as const)}
-              />
-              <input
-                className="border-2 flex-1"
-                type="text"
-                {...register(`ingredients.${index}.amount` as const)}
-              />
-              {index > 0 && (
-                <button
-                  className="border-2"
-                  type="button"
-                  onClick={() => removeIngredient(index)}
-                >
-                  Remove
-                </button>
-              )}
-            </div>
-          ))}
-          <button
-            className="mt-2 border-2"
-            type="button"
-            onClick={() => appendIngredient({ ingredient: '', amount: '' })}
-          >
-            Add Ingredient
-          </button>
-        </div>
-        {/* steps */}
-        <div>
-          <label className="border-b-2 block">Steps</label>
-          {stepFields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2">
-              <input
-                className="border-2 flex-1"
-                type="text"
-                {...register(`steps.${index}.step` as const)}
-              />
-              {index > 0 && (
-                <button
-                  className="border-2"
-                  type="button"
-                  onClick={() => removeStep(index)}
-                >
-                  Remove
-                </button>
-              )}
-            </div>
-          ))}
-          <button
-            className="mt-2 border-2"
-            type="button"
-            onClick={() => appendStep({ step: '' })}
-          >
-            Add Step
-          </button>
-        </div>
+          <FormItem>
+            <FormLabel>Ingredients</FormLabel>
+            {ingredientFields.map((field, index) => (
+              <div key={field.id} className="flex items-center gap-4 mb-2">
+                <FormField
+                  control={control}
+                  name={`ingredients.${index}.ingredient`}
+                  render={({ field }) => (
+                    <FormControl>
+                      <Input placeholder="Ingredient" {...field} />
+                    </FormControl>
+                  )}
+                />
+                <FormField
+                  control={control}
+                  name={`ingredients.${index}.amount`}
+                  render={({ field }) => (
+                    <FormControl>
+                      <Input placeholder="Amount" {...field} />
+                    </FormControl>
+                  )}
+                />
+                {index > 0 && (
+                  <Button
+                    variant="destructive"
+                    type="button"
+                    onClick={() => removeIngredient(index)}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => appendIngredient({ ingredient: '', amount: '' })}
+            >
+              Add Ingredient
+            </Button>
+          </FormItem>
 
-        <Button type="submit" className="mt-4">
-          Save Recipe
-        </Button>
-      </form>
+          <FormItem>
+            <FormLabel>Steps</FormLabel>
+            {stepFields.map((field, index) => (
+              <div key={field.id} className="flex items-center gap-4 mb-2">
+                <FormField
+                  control={control}
+                  name={`steps.${index}.step`}
+                  render={({ field }) => (
+                    <FormControl>
+                      <Input placeholder="Step" {...field} />
+                    </FormControl>
+                  )}
+                />
+                {index > 0 && (
+                  <Button
+                    variant="destructive"
+                    type="button"
+                    onClick={() => removeStep(index)}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => appendStep({ step: '' })}
+            >
+              Add Step
+            </Button>
+          </FormItem>
+
+          <Button type="submit">Save Recipe</Button>
+        </form>
+      </Form>
     </div>
   )
 }
