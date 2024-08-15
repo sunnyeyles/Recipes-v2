@@ -3,6 +3,16 @@
 import { Button } from '@/components/ui/button'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
+import { BinIcon } from './bin-icon'
+import { useState } from 'react'
+import {
+  FileUploader,
+  FileUploaderContent,
+  FileUploaderItem,
+  FileInput,
+} from '@/components/ui/image-upload'
+import { Paperclip } from 'lucide-react'
+import { FileSvgDraw } from './file-svg-draw'
 import {
   Form,
   FormField,
@@ -17,6 +27,7 @@ type TFormType = {
   steps: {
     step: string
   }[]
+  files: File[] | null
 }
 
 export const RecipeStepsForm = () => {
@@ -25,10 +36,11 @@ export const RecipeStepsForm = () => {
       recipeName: 'recipe name',
       ingredients: [{ ingredient: '', amount: '' }],
       steps: [{ step: '' }],
+      files: null,
     },
   })
 
-  const { control, handleSubmit } = form
+  const { control, handleSubmit, setValue } = form
 
   // ingredients
   const {
@@ -54,10 +66,25 @@ export const RecipeStepsForm = () => {
     console.log('Form submitted: ', data)
   }
 
+  const [files, setFiles] = useState<File[] | null>(null)
+
+  const dropZoneConfig = {
+    maxFiles: 5,
+    maxSize: 1024 * 1024 * 4,
+    multiple: true,
+  }
+
+  // Update form data with files whenever they change
+  const handleFileChange = (files: File[] | null) => {
+    setFiles(files)
+    setValue('files', files)
+  }
+
   return (
-    <div className="p-8">
+    <div className="p-12 my-12">
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          {/* recipe name */}
           <FormField
             control={control}
             name="recipeName"
@@ -70,7 +97,7 @@ export const RecipeStepsForm = () => {
               </FormItem>
             )}
           />
-
+          {/* ingredients */}
           <FormItem>
             <FormLabel>Ingredients</FormLabel>
             {ingredientFields.map((field, index) => (
@@ -95,11 +122,16 @@ export const RecipeStepsForm = () => {
                 />
                 {index > 0 && (
                   <Button
-                    variant="destructive"
                     type="button"
-                    onClick={() => removeIngredient(index)}
+                    variant="secondary"
+                    className="active:animate-ping"
+                    onClick={() => {
+                      setTimeout(() => {
+                        removeIngredient(index)
+                      }, 200)
+                    }}
                   >
-                    Remove
+                    <BinIcon />
                   </Button>
                 )}
               </div>
@@ -112,7 +144,7 @@ export const RecipeStepsForm = () => {
               Add Ingredient
             </Button>
           </FormItem>
-
+          {/* steps */}
           <FormItem>
             <FormLabel>Steps</FormLabel>
             {stepFields.map((field, index) => (
@@ -128,11 +160,16 @@ export const RecipeStepsForm = () => {
                 />
                 {index > 0 && (
                   <Button
-                    variant="destructive"
                     type="button"
-                    onClick={() => removeStep(index)}
+                    variant="secondary"
+                    className="active:animate-ping"
+                    onClick={() => {
+                      setTimeout(() => {
+                        removeStep(index)
+                      }, 200)
+                    }}
                   >
-                    Remove
+                    <BinIcon />
                   </Button>
                 )}
               </div>
@@ -144,6 +181,32 @@ export const RecipeStepsForm = () => {
             >
               Add Step
             </Button>
+          </FormItem>
+
+          {/* file upload */}
+          <FormItem>
+            <FileUploader
+              value={files}
+              onValueChange={handleFileChange}
+              dropzoneOptions={dropZoneConfig}
+              className="relative bg-background rounded-lg p-2 border-2"
+            >
+              <FileInput className="outline-dashed outline-1 outline-white">
+                <div className="flex items-center justify-center flex-col pt-3 pb-4 w-full ">
+                  <FileSvgDraw />
+                </div>
+              </FileInput>
+              <FileUploaderContent>
+                {files &&
+                  files.length > 0 &&
+                  files.map((file, i) => (
+                    <FileUploaderItem key={i} index={i}>
+                      <Paperclip className="h-4 w-4 strokeCurrent" />
+                      <span>{file.name}</span>
+                    </FileUploaderItem>
+                  ))}
+              </FileUploaderContent>
+            </FileUploader>
           </FormItem>
 
           <Button type="submit">Save Recipe</Button>

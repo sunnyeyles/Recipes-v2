@@ -1,12 +1,12 @@
-import { UserButton } from "@clerk/nextjs";
-import { ReactNode } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import crab from "../../assets/crab-svgrepo-com.svg";
+import { UserButton } from '@clerk/nextjs'
+import { ReactNode } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import crab from '../../assets/crab-svgrepo-com.svg'
 
 type NavProps = {
-  children?: ReactNode;
-};
+  children?: ReactNode
+}
 export const Nav = ({ children }: NavProps) => {
   return (
     <nav className="flex gap-12 items-end flex-wrap justify-between p-6 shadow-xl w-full">
@@ -30,10 +30,15 @@ export const Nav = ({ children }: NavProps) => {
         <Link href="about">
           <li className="hover:underline hover:cursor-pointer">About</li>
         </Link>
+        <Link href="upload-recipe">
+          <li className="hover:underline hover:cursor-pointer">
+            Upload Recipe
+          </li>
+        </Link>
       </ul>
       {children}
       <UserButton />
     </nav>
-  );
-};
-export default Nav;
+  )
+}
+export default Nav

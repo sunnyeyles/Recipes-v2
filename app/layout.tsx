@@ -5,7 +5,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
-
+// import { listAllBuckets, addObjectS3 } from '@/s3'
 export const metadata: Metadata = {
   title: 'Recipe Generator',
   description: 'Recipe Generator',
