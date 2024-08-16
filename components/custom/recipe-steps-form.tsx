@@ -5,6 +5,7 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { BinIcon } from './bin-icon'
 import { useState } from 'react'
+import { createRecipeAndRetrieve } from '@/api-client/createUserRecipe'
 import {
   FileUploader,
   FileUploaderContent,
@@ -78,6 +79,12 @@ export const RecipeStepsForm = () => {
   const handleFileChange = (files: File[] | null) => {
     setFiles(files)
     setValue('files', files)
+    createRecipeAndRetrieve({
+      recipeName: 'recipe name',
+      ingredients: [{ ingredient: '', amount: '' }],
+      steps: [{ step: '' }],
+      files: files,
+    })
   }
 
   return (

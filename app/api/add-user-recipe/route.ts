@@ -11,7 +11,6 @@ export const saveUserRecipe = async (userRecipe: TUserRecipeType) => {
       const newRecipe = new UserRecipe(userRecipe)
       await foundUser.recipes.push(newRecipe._id)
       await newRecipe.save()
-      // await
     } else {
       console.log('User not found')
     }
