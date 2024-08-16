@@ -1,14 +1,14 @@
-"use client";
-import { useState } from "react";
-import { RecipeType } from "@/types/mainTypes";
+'use client'
+import { useState } from 'react'
+import { RecipeType } from '@/types/mainTypes'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "../ui/button";
-import { Card } from "@/components/ui/card";
+} from '@/components/ui/accordion'
+import { Button } from '../ui/button'
+import { Card } from '@/components/ui/card'
 
 export const RecipeCard = ({
   ingredients,
@@ -20,15 +20,15 @@ export const RecipeCard = ({
 }: RecipeType) => {
   const [completedIngredients, setCompletedIngredients] = useState<boolean[]>(
     []
-  );
+  )
 
   const handleIngredientClick = (index: number): void => {
     setCompletedIngredients((prevCompleted) => {
-      const newCompleted: boolean[] = [...prevCompleted];
-      newCompleted[index] = !newCompleted[index];
-      return newCompleted;
-    });
-  };
+      const newCompleted: boolean[] = [...prevCompleted]
+      newCompleted[index] = !newCompleted[index]
+      return newCompleted
+    })
+  }
 
   return (
     <Card className="group flex flex-col gap-6 m-20 shadow-lg p-4 min-w-80 relative odd:bg-slate-50 even:bg-slate-100">
@@ -44,8 +44,8 @@ export const RecipeCard = ({
                       onDoubleClick={() => handleIngredientClick(index)}
                       className={`cursor-pointer ${
                         completedIngredients[index]
-                          ? "line-through text-gray-900"
-                          : ""
+                          ? 'line-through text-gray-900'
+                          : ''
                       }`}
                       key={index}
                     >
@@ -109,14 +109,14 @@ export const RecipeCard = ({
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
             />
           </svg>
         </Button>
       </div>
     </Card>
-  );
-};
+  )
+}

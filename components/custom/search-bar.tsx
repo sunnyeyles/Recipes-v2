@@ -1,42 +1,42 @@
-"use client";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { fetchGeneratedRecipe } from "@/api-client/fetchAIGeneratedRecipe";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RecipeType } from "@/types/mainTypes";
+'use client'
+import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { fetchGeneratedRecipe } from '@/api-client/fetchAIGeneratedRecipe'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { RecipeType } from '@/types/mainTypes'
 const inputSchema = z.object({
   input: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: 'Username must be at least 2 characters.',
   }),
-});
+})
 
 export const SearchBar = ({
   onDataReceived,
 }: {
-  onDataReceived: (newRecipes: RecipeType[]) => void;
+  onDataReceived: (newRecipes: RecipeType[]) => void
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const form = useForm<z.infer<typeof inputSchema>>({
     resolver: zodResolver(inputSchema),
     defaultValues: {
-      input: "",
+      input: '',
     },
-  });
+  })
   const onSubmit = async (data: { input: string }) => {
     try {
-      setIsLoading(true);
-      const response = await fetchGeneratedRecipe(data.input);
-      form.reset();
-      setIsLoading(false);
-      onDataReceived(response.data.recipes);
+      setIsLoading(true)
+      const response = await fetchGeneratedRecipe(data.input)
+      form.reset()
+      setIsLoading(false)
+      onDataReceived(response.data.recipes)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -67,7 +67,7 @@ export const SearchBar = ({
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"
@@ -82,5 +82,5 @@ export const SearchBar = ({
         </div>
       </form>
     </Form>
-  );
-};
+  )
+}
