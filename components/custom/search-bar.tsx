@@ -17,7 +17,7 @@ const inputSchema = z.object({
 export const SearchBar = ({
   onDataReceived,
 }: {
-  onDataReceived: (newRecipes: RecipeType[]) => void
+  onDataReceived: (recipes: RecipeType[]) => void
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const form = useForm<z.infer<typeof inputSchema>>({

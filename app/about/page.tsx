@@ -26,7 +26,7 @@ const About = () => {
             everyone.
           </p>
           <p className="text-gray-600">
-            Thank's for checking it out, happy cooking!
+            Thank&apos;s for checking it out, happy cooking!
           </p>
           <h2 className="text-2xl font-bold text-gray-900">
             Technologies Used

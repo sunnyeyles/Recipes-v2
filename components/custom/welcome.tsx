@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 
 type UsersName = {
   name: string
